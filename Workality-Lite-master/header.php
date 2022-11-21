@@ -86,47 +86,49 @@
  
  <body <?php body_class(); ?>>
 	<div class="container">
-		<div class="sixteen columns topmargin">
-            <div class="six columns alpha">
-            <a href="#" class="button navbarbutton pull-right"><i class="menu-icon"></i></a>
-				<?php 
-                 if(of_get_option('md_header_logo')) { 
-                    echo '<a href="'.home_url().'" title="'.get_bloginfo( 'name' ).'"><img src="'.of_get_option('md_header_logo').'" class="" alt="'.get_bloginfo( 'name' ).'"></a>';
-                 }elseif(of_get_option('md_header_logo_text')) {
-                    echo '<a href="'.home_url().'" class="main-logo" title="drone">'.of_get_option('md_header_logo_text').'</a>';	
-                 }else{
-					echo '<a href="'.home_url().'" class="main-logo" title="drone">'.get_bloginfo('name').'</a>';
-				 }
-                 ?>
-            </div>
-    		<div class="ten columns omega header-right">
-            	<div class="nav-div">
-                <?php 
-				$md_head_search = of_get_option('md_header_disable_search');
-				$md_head_subtext = of_get_option('md_header_logo_subtext');
-				if(!$md_head_search) : ?>
-                <form action="<?php echo get_site_url()?>">
-            		<input type="text" name="s" class="medium" value=""><button type="submit"><i class='icon-search'></i></button>
-                </form>
-                <?php endif; ?>
-                
-				<?php 
-					if($md_head_search) { 
-						echo '<div style="margin-top:25px;">';
-						wp_nav_menu(array(
-                        'theme_location' => 'main_menu',
-                        'container' => '',
-                        'menu_class' => 'main-nav text-shadow',
-                        'before' => '',
-                        'fallback_cb' => ''
-                    	));
-					 	echo '</div>';
-						$menushowed=1;
-					 } 
-				 ?>
+		<div class="header-wrapper">
+            <div class="header">
+                <div class="header-logo">
+                    <a href="#" class="button navbarbutton pull-right"><i class="menu-icon"></i></a>
+                        <?php 
+                        if(of_get_option('md_header_logo')) { 
+                            echo '<a href="'.home_url().'" title="'.get_bloginfo( 'name' ).'"><img src="'.of_get_option('md_header_logo').'" class="" alt="'.get_bloginfo( 'name' ).'"></a>';
+                        }elseif(of_get_option('md_header_logo_text')) {
+                            echo '<a href="'.home_url().'" class="main-logo" title="drone">'.of_get_option('md_header_logo_text').'</a>';	
+                        }else{
+                            echo '<a href="'.home_url().'" class="main-logo" title="drone">'.get_bloginfo('name').'</a>';
+                        }
+                        ?>
+                    </div>
+                    <div class="ten columns omega header-right">
+                        <div class="nav-div">
+                        <?php 
+                        $md_head_search = of_get_option('md_header_disable_search');
+                        $md_head_subtext = of_get_option('md_header_logo_subtext');
+                        if(!$md_head_search) : ?>
+                        <form action="<?php echo get_site_url()?>">
+                            <input type="text" name="s" class="medium" value=""><button type="submit"><i class='icon-search'></i></button>
+                        </form>
+                        <?php endif; ?>
+                        
+                        <?php 
+                            if($md_head_search) { 
+                                echo '<div>';
+                                wp_nav_menu(array(
+                                'theme_location' => 'main_menu',
+                                'container' => '',
+                                'menu_class' => 'main-nav text-shadow',
+                                'before' => '',
+                                'fallback_cb' => ''
+                                ));
+                                echo '</div>';
+                                $menushowed=1;
+                            } 
+                        ?>
+                    </div>
                 </div>
             </div>
-            <br class="clear" />
+            <!-- <br class="clear" />
             <div class="six columns alpha">
 				<h6 class="subtext"><?php echo $md_head_subtext; ?></h6>
             </div>
@@ -143,7 +145,7 @@
             </div>
             <?php } ?>
             <br class="clear" />
-			<hr class="headerbottom border-color" />
+			<hr class="headerbottom border-color" /> -->
 		</div>
         
     <div class="header_contact"></div>
