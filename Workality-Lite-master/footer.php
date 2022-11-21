@@ -12,7 +12,7 @@
 			$columnclass = "sixteen columns";
 		}
 	?>
-        <br class="clear" />
+        <!-- <br class="clear" />
         <footer>	
                 <div class="sixteen columns" style="display:none;">
                     <hr class="footer border-color" />
@@ -46,6 +46,30 @@
                     <hr class="border-color" />
                 </div>
                 	<?php } ?>   
+        </footer> -->
+
+
+        <footer class="footer">
+            <div class="footer-col">
+                <h4 class="page-title--primary">Ramony Lim</h4>
+                <p>Creative Director Freelance</p>
+                <p>Paris</p>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="page-title--primary">Stay in touch!</h4>
+                <p><a href="mailto:hello@ramonylim.com">hello@ramonylim.com</a></p>
+                <p>+33 6 76 85 50 04</p>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="page-title--primary">Follow me!</h4>
+                <p><a href="http://instagram.com/ramony_lim/" target="_blank">@ramony_lim</a></p>
+                <p><a href="https://www.linkedin.com/in/ramony-lim-891b2396/" target="_blank">Ramony Lim</a></p>
+            </div>
+            <div class="footer-bottom">
+                <p>©2022 Ramony Lim - <a href="/mentions-legales">Mentions Légales</a></p>
+            </div>
         </footer>
         
     </div> 
