@@ -1605,7 +1605,7 @@ font-size:0.7em;
 		padding:0; 
 	}
 	ul.main-nav li { 
-		font-weight: bold; 
+		font-weight: 400; 
 		float: left; 
 		zoom: 1; 
 		position: relative;
@@ -1627,6 +1627,7 @@ font-size:0.7em;
 		border-bottom:3px solid; 
 		border-color:#000;
 		color:#000;
+        font-weight: bold;
 	}
 /* 
 	LEVEL TWO
@@ -2580,6 +2581,14 @@ RA
     width: 100%;
 }
 
+.footer i {
+    font-size: 22px;
+    margin-right: 10px;
+    color: black;
+    position: relative;
+    bottom: -4px;
+}
+
 .footer-col {
     position: relative;
     padding-left: 15px;
@@ -2674,6 +2683,29 @@ RA
 
 .header-logo {
     max-width: 280px;
+}
+
+.header-social {
+    display: flex;
+    margin-left: 20px;
+    padding-bottom: 8px;
+    margin-right: -5px;
+}
+
+.header-social a {
+    margin: 0 5px;
+    font-size: 18px;
+    color: black;
+    transition: opacity .5s ease;
+}
+
+.header-social a:hover {
+    opacity: .5;
+}
+
+.nav-div {
+    display: flex;
+    align-items: center;
 }
 
 /* ----------- */

@@ -125,6 +125,11 @@
                                 $menushowed=1;
                             } 
                         ?>
+
+                        <div class="header-social">
+                            <a href="http://instagram.com/ramony_lim/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="https://www.linkedin.com/in/ramony-lim-891b2396/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>

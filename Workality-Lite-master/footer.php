@@ -64,8 +64,8 @@
 
             <div class="footer-col">
                 <h4 class="page-title--primary">Follow me!</h4>
-                <p><a href="http://instagram.com/ramony_lim/" target="_blank">@ramony_lim</a></p>
-                <p><a href="https://www.linkedin.com/in/ramony-lim-891b2396/" target="_blank">Ramony Lim</a></p>
+                <p><i class="fa-brands fa-instagram"></i><a href="http://instagram.com/ramony_lim/" target="_blank">@ramony_lim</a></p>
+                <p><i class="fa-brands fa-linkedin"></i><a href="https://www.linkedin.com/in/ramony-lim-891b2396/" target="_blank">Ramony Lim</a></p>
             </div>
             <div class="footer-bottom">
                 <p>©2022 Ramony Lim - <a href="/mentions-legales">Mentions Légales</a></p>
@@ -105,6 +105,9 @@ echo showshareingpost('','','',1);
   get_template_part( 'admin', 'custom' );
   wp_footer();
 ?>
+
+<script src="https://kit.fontawesome.com/e8e51aa74a.js" crossorigin="anonymous"></script>
+
 </body>
 </html>
 
