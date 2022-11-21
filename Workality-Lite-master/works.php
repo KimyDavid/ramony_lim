@@ -55,122 +55,115 @@ if ($first->have_posts()) {
 }
 ?>
 
-<div class="columns navibg withall border-color">
-    <div class="four columns alpha">
-        <h3><?php _e('Works', 'dronetv'); ?></h3>
-    </div>
+<div class="portfolio-wrapper">
+    <aside class="portfolio-nav">
+        <h2 class="page-title--primary">Discover my projects</h2>
+        <p>Most of these projects were achieved at Saguez & Partners, a global design agency.</p>
+        <p>La plupart de ces projets ont été réalisés pour des clients de l’agence Saguez & Partners</p>
+        <hr class="portfolio-separator" />
+        <span class="portfolio-filter-title">Filter by :</span>
+        <div class="portfolio-filters">
+                    <?php
+                    // GET CATEGORIES
+                    $tp = 'works-categories';
+                    $cats = get_terms($tp);
+                    $count_cats = count($cats);
+                    if ($count_cats > 0) {
+                    ?>
+                        <a href="#" data-rel="all" class="portfolio-filter <?php if (!isset($term)) {
+                                                                            echo 'portfolio-filter--active';
+                                                                        } ?>" data-th="<?php echo $getbr[3] ?>" title="<?php echo __("ALL", "dronetv"); ?>"><?php echo __("ALL", "dronetv"); ?></a>
+                        <?php
+                        foreach ($cats as $catd) {
+                        ?>
+                            <a href="<?php echo esc_attr(get_term_link($catd, $tp)); ?>" class="portfolio-filter <?php if (isset($term) && $catd->slug == $term) {
+                                                                                                                    echo 'portfolio-filter--active';
+                                                                                                                } ?>" data-th="<?php echo $getbr[3] ?>" data-rel="<?php echo $catd->slug; ?>" title="<?php if (isset($term)) echo $term->name; ?>"><?php echo strtoupper($catd->name); ?></a>
+                        <?php } ?>
+                    <?php    } ?>
 
-    <div class="sixteen columns omega" style="margin-left:0;margin-right:0;">
-        <div id="portfolio-cats" class="navigate">
-            <hr class="resshow border-color" />
-            <div class="fullnav">
-                <?php
-                // GET CATEGORIES
-                $tp = 'works-categories';
-                $cats = get_terms($tp);
-                $count_cats = count($cats);
-                if ($count_cats > 0) {
-                ?>
-                    <a href="#" data-rel="all" class="activemenu-bg <?php if (!isset($term)) {
-                                                                        echo 'selected';
-                                                                    } ?>" data-th="<?php echo $getbr[3] ?>" title="<?php echo __("ALL", "dronetv"); ?>"><?php echo __("ALL", "dronetv"); ?></a>
+                <select class="responsiveselect reschange border-color">
+                    <option value="all" selected=""><?php _e('Creative Fields...', 'dronetv') ?></option>
                     <?php
                     foreach ($cats as $catd) {
                     ?>
-                        <a href="<?php echo esc_attr(get_term_link($catd, $tp)); ?>" class="activemenu-bg <?php if (isset($term) && $catd->slug == $term) {
-                                                                                                                echo 'selected';
-                                                                                                            } ?>" data-th="<?php echo $getbr[3] ?>" data-rel="<?php echo $catd->slug; ?>" title="<?php if (isset($term)) echo $term->name; ?>"><?php echo strtoupper($catd->name); ?></a>
+                        <option value="<?php echo $catd->slug; ?>"><?php echo $catd->name; ?></option>
                     <?php } ?>
-                <?php    } ?>
-            </div>
-
-            <div class="warning">Most of these projects were achieved at Saguez & Partners, a global design agency // La plupart de ces projets ont été réalisés pour des clients de l’agence Saguez & Partners</div>
-            <select class="responsiveselect reschange border-color">
-                <option value="all" selected=""><?php _e('Creative Fields...', 'dronetv') ?></option>
-                <?php
-                foreach ($cats as $catd) {
-                ?>
-                    <option value="<?php echo $catd->slug; ?>"><?php echo $catd->name; ?></option>
-                <?php } ?>
-            </select>
+                </select>
         </div>
-    </div>
-</div>
-<div class="works-single hidden"></div>
+    </aside>
 
-<br class="clear">
+    <main class="portfolio-projects">
+        <?php while (have_posts()) : the_post(); ?>
+            <?php
 
-<div id="post-list" class="row">
-    <?php while (have_posts()) : the_post(); ?>
-        <?php
+            // THUMBNAIL & CSS CLASS
+            $cthumbnail = getThumb($thumb);
 
-        // THUMBNAIL & CSS CLASS
-        $cthumbnail = getThumb($thumb);
+            //forresponsive
+            $getfull = getThumb('large');
 
-        //forresponsive
-        $getfull = getThumb('large');
-
-        // RESET TO ARRAYS
-        $draught_links = array();
-        $draught_links_q = array();
-
-        // AJAX TOKEN
-        $token = wp_create_nonce("wp_token");
-
-        // POST CATEGORIES
-        $categories = "";
-        $categories_q = "";
-
-        $terms = get_the_terms($post->ID, 'works-categories', 'string');
-
-        if ($terms && !is_wp_error($terms)) {
+            // RESET TO ARRAYS
             $draught_links = array();
             $draught_links_q = array();
-            foreach ($terms as $term) {
-                $draught_links[] = $term->name;
-                $draught_links_q[] = $term->slug;
+
+            // AJAX TOKEN
+            $token = wp_create_nonce("wp_token");
+
+            // POST CATEGORIES
+            $categories = "";
+            $categories_q = "";
+
+            $terms = get_the_terms($post->ID, 'works-categories', 'string');
+
+            if ($terms && !is_wp_error($terms)) {
+                $draught_links = array();
+                $draught_links_q = array();
+                foreach ($terms as $term) {
+                    $draught_links[] = $term->name;
+                    $draught_links_q[] = $term->slug;
+                }
+                $categories = join(", ", $draught_links);
+                $categories_q = join(" ", $draught_links_q);
             }
-            $categories = join(", ", $draught_links);
-            $categories_q = join(" ", $draught_links_q);
-        }
 
-        /// DECIDE WHICH CATEGORY TO SHOW	
-        $paste = '';
-        if (isset($checkcat)) {
-            if (!in_array($checkcat, $draught_links_q)) {
-                $paste = 'style="display:none"';
+            /// DECIDE WHICH CATEGORY TO SHOW	
+            $paste = '';
+            if (isset($checkcat)) {
+                if (!in_array($checkcat, $draught_links_q)) {
+                    $paste = 'style="display:none"';
+                }
             }
-        }
 
-        // RESET TO ARRAYS
-        $draught_links = array();
-        $draught_links_q = array();
+            // RESET TO ARRAYS
+            $draught_links = array();
+            $draught_links_q = array();
 
-        ?>
-        <div class="<?php echo $categories_q;
-                    echo " " . $cthumbnail[1]; ?> project-item" <?php echo $paste; ?>>
-            <div class="imgdiv">
-                <a href="<?php the_permalink() ?>" class="getworks" data-type="works" data-id="<?php echo $post->ID ?>" data-token="<?php echo $token ?>">
-                    <span></span>
-                    <?php if ($cthumbnail[0]) : ?>
-                        <img src="<?php echo $cthumbnail[0]; ?>" data-small="<?php echo $cthumbnail[0] ?>" data-large="<?php echo $getfull[0] ?>" title="<?php echo get_the_title() ?>" alt="<?php echo get_the_title() ?>" />
-                    <?php endif; ?>
-                </a>
+            ?>
+            <div class="<?php echo $categories_q;
+                        echo " " . $cthumbnail[1]; ?> project-item" <?php echo $paste; ?>>
+                <div class="imgdiv">
+                    <a href="<?php the_permalink() ?>" class="getworks" data-type="works" data-id="<?php echo $post->ID ?>" data-token="<?php echo $token ?>">
+                        <span></span>
+                        <?php if ($cthumbnail[0]) : ?>
+                            <img src="<?php echo $cthumbnail[0]; ?>" data-small="<?php echo $cthumbnail[0] ?>" data-large="<?php echo $getfull[0] ?>" title="<?php echo get_the_title() ?>" alt="<?php echo get_the_title() ?>" />
+                        <?php endif; ?>
+                    </a>
+                </div>
+                <div class="thumb_large">
+                    <h5><a href="<?php the_permalink() ?>" class="getworks" data-type="works" data-id="<?php echo $post->ID ?>" data-token="<?php echo $token ?>"><?php the_title(); ?> / <?php echo $categories_q; ?></a></h5>
+                    <div style="display:none;"><?php the_excerpt(); ?></div>
+                </div>
             </div>
-            <div class="thumb_large">
-                <h5><a href="<?php the_permalink() ?>" class="getworks" data-type="works" data-id="<?php echo $post->ID ?>" data-token="<?php echo $token ?>"><?php the_title(); ?> / <?php echo $categories_q; ?></a></h5>
-                <div style="display:none;"><?php the_excerpt(); ?></div>
-            </div>
-        </div>
-        <?php if ($p == $cthumbnail[3] && $paste == '') {
-            $p = 0;
-            echo '<br class="clear rowseperator">';
-        } ?>
-        <?php if ($paste == '') {
-            $p++;
-        }  ?>
-    <?php endwhile; ?>
-
+            <?php if ($p == $cthumbnail[3] && $paste == '') {
+                $p = 0;
+                echo '<br class="clear rowseperator">';
+            } ?>
+            <?php if ($paste == '') {
+                $p++;
+            }  ?>
+        <?php endwhile; ?>
+    </main>
 </div>
 
 <div id="logos" class="logos">
