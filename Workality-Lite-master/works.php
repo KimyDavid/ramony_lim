@@ -173,7 +173,7 @@ if ($first->have_posts()) {
 
 </div>
 
-<div id="logos" style="background-color:#dad6d1;padding:20px 5% 20px 5%">
+<div id="logos" class="logos">
     <!-- Pour rajouter un logo copier ce block ci-dessous-->
-    <img src="http://www.ramonylim.com/wp-content/uploads/2014/09/LOGOS-WEB1.png" style="display:block;margin:0 auto;" />
+    <img src="http://www.ramonylim.com/wp-content/uploads/2014/09/LOGOS-WEB1.png"/>
 </div>
