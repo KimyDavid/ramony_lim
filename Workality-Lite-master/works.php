@@ -177,25 +177,3 @@ if ($first->have_posts()) {
     <!-- Pour rajouter un logo copier ce block ci-dessous-->
     <img src="http://www.ramonylim.com/wp-content/uploads/2014/09/LOGOS-WEB1.png" style="display:block;margin:0 auto;" />
 </div>
-
-
-<div id="send-contact">
-    <h3 style="padding-top:30px;margin-left:21%;color:#FFF;letter-spacing:1px;">CONTACT ME</h3>
-    <div id="form">
-        <form action="" method="post" name="mail_form">
-            <input id="name" type="text" name="name" placeholder="NAME/" />
-            <input id="email" type="text" name="email" placeholder="MAIL/" />
-            <textarea id="subject" name="subject" placeholder="MESSAGE/"></textarea>
-            <input type="hidden" name="submitted" value="1">
-            <div class="bottom">
-                <input id="form-submit" type="submit" value="Valider" class="btn" />
-                <div id="pictos">
-                    <a target="_blank" href="https://www.linkedin.com/in/ramony-lim-891b2396/"> LINKEDIN</a>
-                    <a target="_blank" href="https://www.facebook.com/ramony.lim">FACEBOOK</a>
-                    <a target="_blank" href="https://www.behance.net/RamonyLim">BEHANCE</a>
-                    <a target="_blank" href="http://instagram.com/ramony_lim/">INSTAGRAM</a>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
