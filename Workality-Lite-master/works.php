@@ -61,7 +61,7 @@ if ($first->have_posts()) {
     </div>
 
     <div class="sixteen columns omega" style="margin-left:0;margin-right:0;">
-        <div id="portfolio-cats" class="navigate">
+        <div id="portfolio-cats" class="navigate" style="text-align: center;">
             <hr class="resshow border-color" />
             <div class="fullnav">
                 <?php
