@@ -78,7 +78,7 @@ if ($first->have_posts()) {
                         ?>
                             <a href="<?php echo esc_attr(get_term_link($catd, $tp)); ?>" class="portfolio-filter <?php if (isset($term) && $catd->slug == $term) {
                                                                                                                     echo 'portfolio-filter--active';
-                                                                                                                } ?>" data-th="<?php echo $getbr[3] ?>" data-rel="<?php echo $catd->slug; ?>" title="<?php if (isset($term)) echo $term->name; ?>"><?php echo strtoupper($catd->name); ?></a>
+                                                                                                                } ?>" data-th="<?php echo $getbr[3] ?>" data-rel="<?php echo $catd->slug; ?>" title="<?php if (isset($term)) echo $term->name; ?>"><?php echo $catd->name; ?></a>
                         <?php } ?>
                     <?php    } ?>
 
@@ -94,6 +94,20 @@ if ($first->have_posts()) {
     </aside>
 
     <main class="portfolio-projects">
+        <!-- <div class="portfolio-projects-group">
+            <a class="portfolio-project square" href=""><img src="https://www.ramonylim.com/wp-content/uploads/2019/03/CH-FONTENAY_PACKAGING-0A.jpg" alt=""></a>
+            <a class="portfolio-project square-sibling" href=""><img src="https://www.ramonylim.com/wp-content/uploads/2019/03/CH-FONTENAY_PACKAGING-0A.jpg" alt=""></a>
+            <a class="portfolio-project large-sibling" href=""><img src="https://www.ramonylim.com/wp-content/uploads/2019/03/CH-FONTENAY_PACKAGING-0A.jpg" alt=""></a>
+            <a class="portfolio-project large" href=""><img src="https://www.ramonylim.com/wp-content/uploads/2019/03/CH-FONTENAY_PACKAGING-0A.jpg" alt=""></a>
+        </div>
+        <a class="portfolio-project" href=""><img src="https://www.ramonylim.com/wp-content/uploads/2019/03/CH-FONTENAY_PACKAGING-0A.jpg" alt=""></a>
+        <div class="portfolio-projects-group">
+            <a class="portfolio-project large" href=""><img src="https://www.ramonylim.com/wp-content/uploads/2019/03/CH-FONTENAY_PACKAGING-0A.jpg" alt=""></a>
+            <a class="portfolio-project large-sibling" href=""><img src="https://www.ramonylim.com/wp-content/uploads/2019/03/CH-FONTENAY_PACKAGING-0A.jpg" alt=""></a>
+            <a class="portfolio-project square-sibling" href=""><img src="https://www.ramonylim.com/wp-content/uploads/2019/03/CH-FONTENAY_PACKAGING-0A.jpg" alt=""></a>
+            <a class="portfolio-project square" href=""><img src="https://www.ramonylim.com/wp-content/uploads/2019/03/CH-FONTENAY_PACKAGING-0A.jpg" alt=""></a>
+        </div> -->
+
         <?php while (have_posts()) : the_post(); ?>
             <?php
 

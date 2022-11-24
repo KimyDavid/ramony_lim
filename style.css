@@ -2788,12 +2788,16 @@ RA
     font-size: 24px;
     font-style: italic;
     display: flex;
+    align-items: center;
     font-weight: 200;
     margin: 12px 0;
 }
 
 .portfolio-filter::before {
-    content: '–';
+    content: '';
+    height: 2px;
+    width: 14px;
+    background: currentColor;
     display: block;
     position: relative;
     max-width: 0;
