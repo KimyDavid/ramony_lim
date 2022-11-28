@@ -72,7 +72,7 @@ if ($first->have_posts()) {
                     ?>
                         <a href="#" data-rel="all" class="portfolio-filter <?php if (!isset($term)) {
                                                                             echo 'portfolio-filter--active';
-                                                                        } ?>" data-th="<?php echo $getbr[3] ?>" title="<?php echo __("ALL", "dronetv"); ?>"><?php echo __("ALL", "dronetv"); ?></a>
+                                                                        } ?>" data-th="<?php echo $getbr[3] ?>" title="<?php echo __("All", "dronetv"); ?>"><?php echo __("All", "dronetv"); ?></a>
                         <?php
                         foreach ($cats as $catd) {
                         ?>
@@ -94,89 +94,161 @@ if ($first->have_posts()) {
     </aside>
 
     <main class="portfolio-projects">
-        <!-- <div class="portfolio-projects-group">
-            <a class="portfolio-project square" href=""><img src="https://www.ramonylim.com/wp-content/uploads/2019/03/CH-FONTENAY_PACKAGING-0A.jpg" alt=""></a>
-            <a class="portfolio-project square-sibling" href=""><img src="https://www.ramonylim.com/wp-content/uploads/2019/03/CH-FONTENAY_PACKAGING-0A.jpg" alt=""></a>
-            <a class="portfolio-project large-sibling" href=""><img src="https://www.ramonylim.com/wp-content/uploads/2019/03/CH-FONTENAY_PACKAGING-0A.jpg" alt=""></a>
-            <a class="portfolio-project large" href=""><img src="https://www.ramonylim.com/wp-content/uploads/2019/03/CH-FONTENAY_PACKAGING-0A.jpg" alt=""></a>
-        </div>
-        <a class="portfolio-project" href=""><img src="https://www.ramonylim.com/wp-content/uploads/2019/03/CH-FONTENAY_PACKAGING-0A.jpg" alt=""></a>
-        <div class="portfolio-projects-group">
-            <a class="portfolio-project large" href=""><img src="https://www.ramonylim.com/wp-content/uploads/2019/03/CH-FONTENAY_PACKAGING-0A.jpg" alt=""></a>
-            <a class="portfolio-project large-sibling" href=""><img src="https://www.ramonylim.com/wp-content/uploads/2019/03/CH-FONTENAY_PACKAGING-0A.jpg" alt=""></a>
-            <a class="portfolio-project square-sibling" href=""><img src="https://www.ramonylim.com/wp-content/uploads/2019/03/CH-FONTENAY_PACKAGING-0A.jpg" alt=""></a>
-            <a class="portfolio-project square" href=""><img src="https://www.ramonylim.com/wp-content/uploads/2019/03/CH-FONTENAY_PACKAGING-0A.jpg" alt=""></a>
-        </div> -->
+    
+        <?php
+            $projects = [];
+            $postIndex = 1;
+            $postGroup = 1;
+            
+            while (have_posts()) : the_post();
 
-        <?php while (have_posts()) : the_post(); ?>
-            <?php
-
-            // THUMBNAIL & CSS CLASS
-            $cthumbnail = getThumb($thumb);
-
-            //forresponsive
-            $getfull = getThumb('large');
-
-            // RESET TO ARRAYS
-            $draught_links = array();
-            $draught_links_q = array();
-
-            // AJAX TOKEN
-            $token = wp_create_nonce("wp_token");
-
-            // POST CATEGORIES
-            $categories = "";
-            $categories_q = "";
-
-            $terms = get_the_terms($post->ID, 'works-categories', 'string');
-
-            if ($terms && !is_wp_error($terms)) {
+                // RESET TO ARRAYS
                 $draught_links = array();
                 $draught_links_q = array();
-                foreach ($terms as $term) {
-                    $draught_links[] = $term->name;
-                    $draught_links_q[] = $term->slug;
+
+                // POST CATEGORIES
+                $categories = "";
+                $categories_q = "";
+
+                $terms = get_the_terms($post->ID, 'works-categories', 'string');
+
+                if ($terms && !is_wp_error($terms)) {
+                    $draught_links = array();
+                    $draught_links_q = array();
+                    foreach ($terms as $term) {
+                        $draught_links[] = $term->name;
+                        $draught_links_q[] = $term->slug;
+                    }
+                    $categories = join(" – ", $draught_links);
+                    $categories_q = join(" ", $draught_links_q);
                 }
-                $categories = join(", ", $draught_links);
-                $categories_q = join(" ", $draught_links_q);
-            }
 
-            /// DECIDE WHICH CATEGORY TO SHOW	
-            $paste = '';
-            if (isset($checkcat)) {
-                if (!in_array($checkcat, $draught_links_q)) {
-                    $paste = 'style="display:none"';
+                $thumbnail = "";
+                if ($postGroup % 2 == 0) {
+                    switch ($postIndex) {
+                        case 1:
+                            $thumbnail = getThumb('portfolio_square');
+                            break;
+                        case 2:
+                            $thumbnail = getThumb('portfolio_square_sibling');
+                            break;
+                        case 3:
+                            $thumbnail = getThumb('portfolio_large_sibling');
+                            break;
+                        case 4:
+                            $thumbnail = getThumb('portfolio_large');
+                            break;
+                    }
+                } else {
+                    switch ($postIndex) {
+                        case 1:
+                            $thumbnail = getThumb('portfolio_large');
+                            break;
+                        case 2:
+                            $thumbnail = getThumb('portfolio_large_sibling');
+                            break;
+                        case 3:
+                            $thumbnail = getThumb('portfolio_square_sibling');
+                            break;
+                        case 4:
+                            $thumbnail = getThumb('portfolio_square');
+                            break;
+                        }
                 }
-            }
 
-            // RESET TO ARRAYS
-            $draught_links = array();
-            $draught_links_q = array();
+                if ($postIndex == 5) {
+                    $thumbnail = getThumb('portfolio_full');
+                }
 
+                array_unshift($projects, [
+                    'link' => get_permalink(),
+                    'thumbnail' => $thumbnail[0],
+                    'title' => get_the_title(),
+                    'excerpt' => get_the_excerpt(),
+                    'terms' => $categories
+                ]);
+
+                // RESET TO ARRAYS
+                $draught_links = array();
+                $draught_links_q = array();
+
+                if ($postIndex == 5):
+                    $postIndex = 0;
+                    $postGroup++;
+                endif; 
+                
+                $postIndex++;
+            
+            endwhile; 
+            
+            $index = 1;
+            $group = 1;
+            $html = '';
+
+            // array_reverse($projects);
+
+            foreach ($projects as $project):
+                $section = '';
+
+                if ($index == 1):
+                    $section = $section . '</div>';
+                endif; 
+                
+                $class = "";
+                if ($group % 2 == 0) {
+                    switch ($index) {
+                        case 1:
+                            $class = 'square';
+                            break;
+                        case 2:
+                            $class = 'square-sibling';
+                            break;
+                        case 3:
+                            $class = 'large-sibling';
+                            break;
+                        case 4:
+                            $class = 'large';
+                            break;
+                    }
+                } else {
+                    switch ($index) {
+                        case 1:
+                            $class = 'large';
+                            break;
+                        case 2:
+                            $class = 'large-sibling';
+                            break;
+                        case 3:
+                            $class = 'square-sibling';
+                            break;
+                        case 4:
+                            $class = 'square';
+                            break;
+                    }
+                }
+                
+                $section = '<a class="portfolio-project '.$class.'" href="'.$project['link'].'">'.
+                    '<h3>'.$project['title'].'<span>'.$project['terms'].'</span></h3>'.
+                    '<img src="'.$project['thumbnail'].'" alt="'.$project['title'].'" />'.
+                    '</a>' . $section;
+                
+                if ($index == 4):
+                    $section = '<div class="portfolio-projects-group">' . $section;
+                endif;
+
+                if ($index == 5):
+                    $index = 0;
+                    $group++;
+                endif;
+
+                $html =  $section . $html;
+                
+                $index++; 
+                
+            endforeach; 
+            
+            echo $html;
             ?>
-            <div class="<?php echo $categories_q;
-                        echo " " . $cthumbnail[1]; ?> project-item" <?php echo $paste; ?>>
-                <div class="imgdiv">
-                    <a href="<?php the_permalink() ?>" class="getworks" data-type="works" data-id="<?php echo $post->ID ?>" data-token="<?php echo $token ?>">
-                        <span></span>
-                        <?php if ($cthumbnail[0]) : ?>
-                            <img src="<?php echo $cthumbnail[0]; ?>" data-small="<?php echo $cthumbnail[0] ?>" data-large="<?php echo $getfull[0] ?>" title="<?php echo get_the_title() ?>" alt="<?php echo get_the_title() ?>" />
-                        <?php endif; ?>
-                    </a>
-                </div>
-                <div class="thumb_large">
-                    <h5><a href="<?php the_permalink() ?>" class="getworks" data-type="works" data-id="<?php echo $post->ID ?>" data-token="<?php echo $token ?>"><?php the_title(); ?> / <?php echo $categories_q; ?></a></h5>
-                    <div style="display:none;"><?php the_excerpt(); ?></div>
-                </div>
-            </div>
-            <?php if ($p == $cthumbnail[3] && $paste == '') {
-                $p = 0;
-                echo '<br class="clear rowseperator">';
-            } ?>
-            <?php if ($paste == '') {
-                $p++;
-            }  ?>
-        <?php endwhile; ?>
     </main>
 </div>
 

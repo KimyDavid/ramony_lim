@@ -102,7 +102,6 @@ if ( is_readable($locale_file) )
 
 
 
-
 /************************************************************
 /* Featured Image Sizes
 /************************************************************/
@@ -110,9 +109,14 @@ if ( ! isset( $content_width ) ) $content_width = 980;
 
 set_post_thumbnail_size(100, 100, true);
 add_image_size('md_post_thumb_large', 460, 350, true);
-add_image_size('md_post_thumb_medium', 300, 100, true);
+// add_image_size('md_post_thumb_medium', 300, 100, true);
 add_image_size('md_post_thumb_small', 220, 170, true);
-add_image_size('md_post_thumb_portrait', 300, 420, true);
+// add_image_size('md_post_thumb_portrait', 300, 420, true);
+add_image_size('portfolio_large', 360, 510, true);
+add_image_size('portfolio_large_sibling', 370, 250, true);
+add_image_size('portfolio_square', 470, 280, true);
+add_image_size('portfolio_square_sibling', 450, 280, true);
+add_image_size('portfolio_full', 850, 500, true);
 
 
 if ( ! function_exists( 'getThumb' ) ) {
@@ -124,30 +128,55 @@ if ( ! function_exists( 'getThumb' ) ) {
 			  $class = 'four columns featured';
 			  $thumbsize = 'md_post_thumb_small';
 			  $after = 4;
-			break;
-			case 'small':
-			  $class = 'four columns featured';
-			  $thumbsize = 'md_post_thumb_small';
-			  $after = 4;
-			break;
-			case 'medium':
-			  $class = 'one-third column featured';
-			  $thumbsize = 'md_post_thumb_medium';
-			  $after = 3;
-			break;
+			// break;
+			// case 'small':
+			//   $class = 'four columns featured';
+			//   $thumbsize = 'md_post_thumb_small';
+			//   $after = 4;
+			// break;
+			// case 'medium':
+			//   $class = 'one-third column featured';
+			//   $thumbsize = 'md_post_thumb_medium';
+			//   $after = 3;
+			// break;
 			case 'large':
 			  $class = 'eight columns featured';
 			  $thumbsize = 'md_post_thumb_large';
 			  $after = 2;
 			break;
-			case 'portrait':
-			  $class = 'one-third column featured';
-			  $thumbsize = 'md_post_thumb_portrait';
-			  $after = 3;
+			// case 'portrait':
+			//   $class = 'one-third column featured';
+			//   $thumbsize = 'md_post_thumb_portrait';
+			//   $after = 3;
+			// break;
+			case 'portfolio_square':
+                $class = '';
+                $thumbsize = 'portfolio_square';
+                $after = 4;
+			break;
+			case 'portfolio_square_sibling':
+                $class = '';
+                $thumbsize = 'portfolio_square_sibling';
+                $after = 4;
+			break;
+			case 'portfolio_large':
+                $class = '';
+                $thumbsize = 'portfolio_large';
+                $after = 3;
+			break;
+			case 'portfolio_large_sibling':
+                $class = '';
+                $thumbsize = 'portfolio_large_sibling';
+                $after = 2;
+			break;
+			case 'portfolio_full':
+                $class = '';
+                $thumbsize = 'portfolio_full';
+                $after = 3;
 			break;
 		}
 
-		@$img = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), $thumbsize );
+		$img = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), $thumbsize );
 		return array($img[0],$class,$thumbsize,$after);
 	}
 }
