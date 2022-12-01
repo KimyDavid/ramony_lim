@@ -2685,14 +2685,14 @@ RA
 }
 
 .header-logo {
-    max-width: 280px;
+    max-width: 310px;
+    display: flex;
+    align-items: center;
 }
 
 .header-social {
     display: flex;
-    margin-left: 20px;
     padding-bottom: 8px;
-    margin-right: -5px;
 }
 
 .header-social a {
