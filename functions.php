@@ -123,32 +123,36 @@ if ( ! function_exists( 'getThumb' ) ) {
 	function getThumb($th) {
 		global $post;
 
+        $thumbsize = '';
+        $after = '';
+        $class = '';
+
 		switch($th) {
 			case 'mini':
 			  $class = 'four columns featured';
 			  $thumbsize = 'md_post_thumb_small';
 			  $after = 4;
-			// break;
-			// case 'small':
-			//   $class = 'four columns featured';
-			//   $thumbsize = 'md_post_thumb_small';
-			//   $after = 4;
-			// break;
-			// case 'medium':
-			//   $class = 'one-third column featured';
-			//   $thumbsize = 'md_post_thumb_medium';
-			//   $after = 3;
-			// break;
+			break;
+			case 'small':
+			  $class = 'four columns featured';
+			  $thumbsize = 'md_post_thumb_small';
+			  $after = 4;
+			break;
+			case 'medium':
+			  $class = 'one-third column featured';
+			  $thumbsize = 'md_post_thumb_medium';
+			  $after = 3;
+			break;
 			case 'large':
 			  $class = 'eight columns featured';
 			  $thumbsize = 'md_post_thumb_large';
 			  $after = 2;
 			break;
-			// case 'portrait':
-			//   $class = 'one-third column featured';
-			//   $thumbsize = 'md_post_thumb_portrait';
-			//   $after = 3;
-			// break;
+			case 'portrait':
+			  $class = 'one-third column featured';
+			  $thumbsize = 'md_post_thumb_portrait';
+			  $after = 3;
+			break;
 			case 'portfolio_square':
                 $class = '';
                 $thumbsize = 'portfolio_square';

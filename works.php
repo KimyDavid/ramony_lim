@@ -185,10 +185,10 @@ if ($first->have_posts()) {
             $group = 1;
             $html = '';
 
-            // array_reverse($projects);
-
-            foreach ($projects as $project):
+            foreach ($projects as $key => $project):
                 $section = '';
+
+                $isLastItem = $key == (count($projects) - 1);
 
                 if ($index == 1):
                     $section = $section . '</div>';
@@ -231,6 +231,47 @@ if ($first->have_posts()) {
                     '<h3>'.$project['title'].'<span>'.$project['terms'].'</span></h3>'.
                     '<img src="'.$project['thumbnail'].'" alt="'.$project['title'].'" />'.
                     '</a>' . $section;
+
+                if ($isLastItem && $index < 4) {
+                    while ($index < 4) {
+                        $index++;
+                        
+                        if ($group % 2 == 0) {
+                            switch ($index) {
+                                case 1:
+                                    $class = 'square';
+                                    break;
+                                case 2:
+                                    $class = 'square-sibling';
+                                    break;
+                                case 3:
+                                    $class = 'large-sibling';
+                                    break;
+                                case 4:
+                                    $class = 'large';
+                                    break;
+                            }
+                        } else {
+                            switch ($index) {
+                                case 1:
+                                    $class = 'large';
+                                    break;
+                                case 2:
+                                    $class = 'large-sibling';
+                                    break;
+                                case 3:
+                                    $class = 'square-sibling';
+                                    break;
+                                case 4:
+                                    $class = 'square';
+                                    break;
+                            }
+                        }
+
+                        $section = '<div class="portfolio-project '.$class.'">'.
+                            '</div>' . $section;
+                    }
+                }
                 
                 if ($index == 4):
                     $section = '<div class="portfolio-projects-group">' . $section;
