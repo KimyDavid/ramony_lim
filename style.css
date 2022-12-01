@@ -1492,6 +1492,9 @@ font-size:0.7em;
 	}
 	div#post-list {
 		margin-top:25px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
 	}
 	a.navbarbutton { display:none; }
 	div.defaultpage { 
@@ -1605,7 +1608,7 @@ font-size:0.7em;
 		padding:0; 
 	}
 	ul.main-nav li { 
-		font-weight: bold; 
+		font-weight: 400; 
 		float: left; 
 		zoom: 1; 
 		position: relative;
@@ -1627,6 +1630,7 @@ font-size:0.7em;
 		border-bottom:3px solid; 
 		border-color:#000;
 		color:#000;
+        font-weight: bold;
 	}
 /* 
 	LEVEL TWO
@@ -2580,6 +2584,14 @@ RA
     width: 100%;
 }
 
+.footer i {
+    font-size: 22px;
+    margin-right: 10px;
+    color: black;
+    position: relative;
+    bottom: -4px;
+}
+
 .footer-col {
     position: relative;
     padding-left: 15px;
@@ -2673,7 +2685,30 @@ RA
 }
 
 .header-logo {
-    max-width: 280px;
+    max-width: 310px;
+    display: flex;
+    align-items: center;
+}
+
+.header-social {
+    display: flex;
+    padding-bottom: 8px;
+}
+
+.header-social a {
+    margin: 0 5px;
+    font-size: 18px;
+    color: black;
+    transition: opacity .5s ease;
+}
+
+.header-social a:hover {
+    opacity: .5;
+}
+
+.nav-div {
+    display: flex;
+    align-items: center;
 }
 
 /* ----------- */
