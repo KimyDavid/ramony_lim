@@ -73,21 +73,36 @@
         </footer>
         
     </div> 
-    <div class="mobilemenu">
-            <?php if(!of_get_option('md_header_disable_search')) : ?>
-              <form>
-            	<input type="text" class="medium" value=""><button type="submit"><i class='icon-search'></i></button>
-              </form>
-            <?php endif; ?>
-            
-             <?php wp_nav_menu(array(
-                        'theme_location' => 'main_menu',
-                        'container' => '',
-                        'menu_class' => 'mob-nav',
-                        'before' => '',
-                        'fallback_cb' => ''
-                    ));
-			 ?>  
+    <div class="mobilemenu-wrapper">
+        <div class="mobilemenu">
+                <i class="mobilemenu-close fa-solid fa-xmark"></i>
+
+                <?php if(!of_get_option('md_header_disable_search')) : ?>
+                <form>
+                    <input type="text" class="medium" value=""><button type="submit"><i class='icon-search'></i></button>
+                </form>
+                <?php endif; ?>
+
+                <?php 
+                    if(of_get_option('md_header_logo')) { 
+                        echo '<a class="mobilemenu-logo" href="'.home_url().'" title="'.get_bloginfo( 'name' ).'"><img src="'.of_get_option('md_header_logo').'" class="" alt="'.get_bloginfo( 'name' ).'"></a>';
+                    }elseif(of_get_option('md_header_logo_text')) {
+                        echo '<a class="mobilemenu-logo" href="'.home_url().'" class="main-logo" title="drone">'.of_get_option('md_header_logo_text').'</a>';	
+                    }else{
+                        echo '<a class="mobilemenu-logo" href="'.home_url().'" class="main-logo" title="drone">'.get_bloginfo('name').'</a>';
+                    }
+                ?>
+                
+                <?php wp_nav_menu(array(
+                            'theme_location' => 'main_menu',
+                            'container' => '',
+                            'menu_class' => 'mob-nav',
+                            'before' => '',
+                            'fallback_cb' => ''
+                        ));
+                ?>  
+        </div>
+        <div class="mobilemenu-overlay"></div>
     </div>
     
     <a href="#" class="backtotop"></a>

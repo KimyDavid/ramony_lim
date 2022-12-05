@@ -29,6 +29,8 @@ query_posts($args);
 // FRO BR
 $p = 1;
 $getbr = getThumb($thumb);
+
+the_content();
 ?>
 
 <?php
@@ -91,9 +93,10 @@ if ($first->have_posts()) {
                     <?php } ?>
                 </select>
         </div>
+        <span class="portfolio-filter-back"><i class="fa-solid fa-arrow-up"></i><span>Back to top</span></span>
     </aside>
 
-    <main class="portfolio-projects">
+    <main class="portfolio-projects" id="main_portfolio">
     
         <?php
             $projects = [];
@@ -165,7 +168,8 @@ if ($first->have_posts()) {
                     'thumbnail' => $thumbnail[0],
                     'title' => get_the_title(),
                     'excerpt' => get_the_excerpt(),
-                    'terms' => $categories
+                    'terms' => $categories,
+                    'cat' => $categories_q
                 ]);
 
                 // RESET TO ARRAYS
@@ -227,9 +231,9 @@ if ($first->have_posts()) {
                     }
                 }
                 
-                $section = '<a class="portfolio-project '.$class.'" href="'.$project['link'].'">'.
+                $section = '<a class="portfolio-project '.$class. ' ' . $project['cat'] . '" href="'.$project['link'].'">'.
                     '<h3>'.$project['title'].'<span>'.$project['terms'].'</span></h3>'.
-                    '<img src="'.$project['thumbnail'].'" alt="'.$project['title'].'" />'.
+                    '<img loading="lazy" src="'.$project['thumbnail'].'" alt="'.$project['title'].'" />'.
                     '</a>' . $section;
 
                 if ($isLastItem && $index < 4) {
@@ -295,5 +299,5 @@ if ($first->have_posts()) {
 
 <div id="logos" class="logos">
     <!-- Pour rajouter un logo copier ce block ci-dessous-->
-    <img src="http://www.ramonylim.com/wp-content/uploads/2014/09/LOGOS-WEB1.png"/>
+    <img loading="lzay" alt="Les marques qui me font confiance" src="http://www.ramonylim.com/wp-content/uploads/2014/09/LOGOS-WEB1.png"/>
 </div>

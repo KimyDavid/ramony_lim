@@ -44,7 +44,7 @@
 		$descrip = of_get_option('md_header_seo_description');
 	}
 	  ?></title>
-	<meta name="description" content="<?php echo $descrip; ?>">
+	<meta name="description" content="<?php echo "Désormais Designer Graphique free-lance, mon expérience chez SAGUEZ & PARTNERS, agence de design global m’a permis de bien comprendre LA MARQUE."; ?>">
 	<meta name="keywords" content="<?php echo of_get_option('md_header_seo_keywords'); ?>">
     
 	<meta name="author" content="drone.tv" />
@@ -85,7 +85,7 @@
 </head>
  
  <body <?php body_class(); ?>>
-	<div class="container">
+    <div class="container header-container">
 		<div class="header-wrapper">
             <div class="header">
                 <div class="header-logo">
@@ -99,13 +99,15 @@
                         echo '<a href="'.home_url().'" class="main-logo" title="drone">'.get_bloginfo('name').'</a>';
                     }
                     ?>
+                    
+                    <a href="/"><img src="<?php echo get_template_directory_uri(); ?>/images/logo_white.svg" class="logo-white" style="display: none;"></a>
 
                     <div class="header-social">
                         <a href="http://instagram.com/ramony_lim/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://www.linkedin.com/in/ramony-lim-891b2396/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://www.linkedin.com/in/ramony-lim-da-graphiste/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
                     </div>
                 </div>
-                    <div class="ten columns omega header-right">
+                <div class="ten columns omega header-right">
                         <div class="nav-div">
                         <?php 
                         $md_head_search = of_get_option('md_header_disable_search');
@@ -130,9 +132,9 @@
                                 $menushowed=1;
                             } 
                         ?>
-                    </div>
                 </div>
             </div>
+        </div>
             <!-- <br class="clear" />
             <div class="six columns alpha">
 				<h6 class="subtext"><?php echo $md_head_subtext; ?></h6>
@@ -153,5 +155,7 @@
 			<hr class="headerbottom border-color" /> -->
 		</div>
         
-    <div class="header_contact"></div>
+        <div class="header_contact"></div>
+	</div>
+	<div class="container">
     
