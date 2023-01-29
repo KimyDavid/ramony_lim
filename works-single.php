@@ -189,7 +189,7 @@
 							$s1++;
 							}else{
 							echo '<div class="contentimages fifteen columns offset-by-half alpha">';
-							echo '<img src="'.stripslashes($v).'" />';
+							echo '<img src="'.stripslashes($v).'" loading="lazy" />';
 								if($mediacaption[$s2]!="") {
 									echo '<div class="caption">'.stripslashes($mediacaption[$s2]).'</div>';
 								}
