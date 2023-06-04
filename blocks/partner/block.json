@@ -1,0 +1,13 @@
+{
+    "name": "acf/partner",
+    "title": "Partenaire",
+    "style": [ "file:./partner.css" ],
+    "category": "formatting",
+    "icon": "admin-comments",
+    "keywords": ["partner", "partenaire"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "partner.php"
+    },
+    "align": "full"
+}

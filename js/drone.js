@@ -206,40 +206,45 @@ $(function() {
 
 
 		/// POST FILTER
-		$('body').on('click','#portfolio-cats a',function(e) {
-			var cat = $(this).attr('data-rel');
-			var murl = $(this).attr('href');
-			var th = $(this).attr('data-th');
-
-			$('br.rowseperator').remove();
-			$('#portfolio-cats a').removeClass('selected');
-			$('#post-list div.project-item').stop(true, true).hide();
-				if(cat=="all") {
-					var wh = 'project-item';
-				}else{
-					var wh = cat;
-				}
-					var s=1;
-					if (Modernizr.touch) {
-					$('#post-list div.'+wh).show();
-					}else{
-					$('#post-list div.'+wh).each(function(index) {
-						$(this).delay(250*index).fadeIn(300);
-						if(s==th) {
-						$('<br class="clear rowseperator" />').insertAfter(this);
-						s=0;
-						}
-						s++;
-					});
-					}
-
-			$(this).addClass('selected');
-			if(murl) {
-			updatelinks(murl);
-			}
-			e.preventDefault();
-			return false;
-		});
+        const postsList = $('#post-list');
+        if (postsList.length > 0) {
+            $('body').on('click','#portfolio-cats a',function(e) {
+                var cat = $(this).attr('data-rel');
+                var murl = $(this).attr('href');
+                var th = $(this).attr('data-th');
+    
+                $('br.rowseperator').remove();
+                $('#portfolio-cats a').removeClass('selected');
+                $('#post-list div.project-item').stop(true, true).hide();
+    
+                if (cat=="all") {
+                    var wh = 'project-item';
+                } else{
+                    var wh = cat;
+                }
+    
+                var s=1;
+                if (Modernizr.touch) {
+                    $('#post-list div.'+wh).show();
+                } else {
+                    $('#post-list div.'+wh).each(function(index) {
+                        $(this).delay(250*index).fadeIn(300);
+                        if(s==th) {
+                            $('<br class="clear rowseperator" />').insertAfter(this);
+                            s=0;
+                        }
+                        s++;
+                    });
+                }
+    
+                $(this).addClass('selected');
+                if(murl) {
+                    updatelinks(murl);
+                }
+                e.preventDefault();
+                return false;
+            });
+        }
 
 		$('body').on('change','select.reschangeblog',function(e) {
 			window.location= $(this).val();
@@ -279,35 +284,37 @@ $(function() {
 
 		/// HOME FILTER
         const all_list = $('#main_portfolio');
-		$('body').on('click','.portfolio-filter',function(e) {
-            e.preventDefault();
-
-            all_list.addClass('disabled');
-
-			var cat = $(this).attr('data-rel');
-			var url = $(this).attr('href');
-
-			$('.portfolio-filter').removeClass('portfolio-filter--active');
-
-            const oldFilteredList = $('#filtered_portfolio');
-            oldFilteredList.remove();
-
-			if(cat=="all") {
-                all_list.removeClass('disabled');
-
-                setTimeout(function() {
-                    $('html').scrollTo('#main_portfolio');
-                }, 500);
-			} else{
-                filterPortfolio(cat);
-
-                setTimeout(function() {
-                    $('html').scrollTo('#filtered_portfolio');
-                }, 500);
-			}
-
-			$(this).addClass('portfolio-filter--active');
-		});
+        if (all_list.length > 0) {
+            $('body').on('click','.portfolio-filter',function(e) {
+                e.preventDefault();
+    
+                all_list.addClass('disabled');
+    
+                var cat = $(this).attr('data-rel');
+                var url = $(this).attr('href');
+    
+                $('.portfolio-filter').removeClass('portfolio-filter--active');
+    
+                const oldFilteredList = $('#filtered_portfolio');
+                oldFilteredList.remove();
+    
+                if(cat=="all") {
+                    all_list.removeClass('disabled');
+    
+                    setTimeout(function() {
+                        $('html').scrollTo('#main_portfolio');
+                    }, 500);
+                } else{
+                    filterPortfolio(cat);
+    
+                    setTimeout(function() {
+                        $('html').scrollTo('#filtered_portfolio');
+                    }, 500);
+                }
+    
+                $(this).addClass('portfolio-filter--active');
+            });
+        }
 
         $('.portfolio-filter-back').on('click', () => {
             $('html,body').animate({scrollTop: 1000},'slow');

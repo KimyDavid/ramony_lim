@@ -481,4 +481,11 @@ if ( ! function_exists( 'my_post_class' ) ) {
 	  return $classes;
 	}
 }
+
+// PARTNERS BLOCK FROM ACF
+add_action( 'init', 'register_acf_blocks' );
+function register_acf_blocks() {
+    register_block_type( __DIR__ . '/blocks/partner' );
+}
+
 ?>

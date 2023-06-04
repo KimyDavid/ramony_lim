@@ -76,9 +76,9 @@ endforeach;
                         foreach ($cats as $catd) {
                             if (in_array($catd->slug, $categoriesToFilter)):
                         ?>
-                            <p class="portfolio-filter <?php if (isset($term) && $catd->slug == $term) {
+                            <a href="<?php echo esc_attr(get_term_link( $catd, $tp )); ?>" class="portfolio-filter <?php if (isset($term) && $catd->slug == $term) {
                                                                                                                     echo 'portfolio-filter--active';
-                                                                                                                } ?>" data-th="<?php echo $getbr[3] ?>" data-rel="<?php echo $catd->slug; ?>" title="<?php if (isset($term)) echo $term->name; ?>"><?php echo $catd->name; ?></p>
+                                                                                                                } ?>" data-th="<?php echo $getbr[3] ?>" data-rel="<?php echo $catd->slug; ?>" title="<?php if (isset($term)) echo $term->name; ?>"><?php echo $catd->name; ?></a>
                         <?php endif; } ?>
                     <?php    } ?>
 
